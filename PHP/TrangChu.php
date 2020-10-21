@@ -1,11 +1,6 @@
 <?php
-session_start();
-if ( isset( $_SESSION[ 'userId' ] ) && isset( $_SESSION[ 'username' ] ) ) {
-  $username = isset( $_SESSION[ 'username' ] );
-} else {
-  header( "Location: DangNhap.php" );
-  exit;
-}
+include_once("SessionStarted.php");
+$username = CheckSessionStarted();
 ?>
 <!doctype html>
 <html lang="en-US">
@@ -15,6 +10,8 @@ if ( isset( $_SESSION[ 'userId' ] ) && isset( $_SESSION[ 'username' ] ) ) {
 <link rel="shortcut icon" href="http://designshack.net/favicon.ico">
 <link rel="stylesheet" type="text/css" media="all" href="../CSS/style.css">
 <link rel="stylesheet" type="text/css" href="../CSS/verticalMenu.css">
+<script src="../js/bootstrap-4.5.3-dist/js/bootstrap.js"></script>
+<script src="https://kit.fontawesome.com/af774a8861.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="../js/jquery-1.9.1.min.js"></script> 
 <script type="text/javascript" src="../js/requestUser.js"></script> 
 <script type="text/javascript" charset="utf-8" src="../js/jquery.leanModal.min.js"></script>
@@ -24,7 +21,7 @@ if ( isset( $_SESSION[ 'userId' ] ) && isset( $_SESSION[ 'username' ] ) ) {
 <div id="topbar"><a href="TrangChu.php">BOOKSTORE ONLINE</a></div>
 <div id="w">
   <div id="content">
-    <h1>Chào mừng <?php echo $username?> đến với BookStoreOnline <a href="DangXuat.php">Đăng Xuất</a></h1>
+    <h1>Chào mừng <?php echo $username?> đến với BookStoreOnline <a href="DangXuat.php" ><i class="fas fa-sign-out-alt"></i></a></h1>
    
     <center>
       <a href="#actionmodal" class="flatbtn" id="modaltrigger">CHỨC NĂNG</a>
@@ -32,8 +29,15 @@ if ( isset( $_SESSION[ 'userId' ] ) && isset( $_SESSION[ 'username' ] ) ) {
   </div>
 </div>
 <div id="actionmodal" style="display: none">
-  <div class="vertical-menu"> <a href="TimSach.php">Tìm Sách</a> <a href="ThemSach.php">Thêm Sách</a> <a href="CapNhatSach.php">Cập Nhật Sách</a> </div>
-</div>
+	<h1>CHỌN TÍNH NĂNG</h1>
+	<center>
+	<div class="vertical-menu" align="center"> 
+	  <a href="TimSach.php" class="flatbtn">Tìm Sách</a> 
+	  <a href="ThemSach.php" class="flatbtn">Thêm Sách</a> 
+	  <a href="CapNhatSach.php" class="flatbtn">Cập Nhật Sách</a> </div>
+	</div> 
+	</center>
+  
 <script>
 	$(function(){ 
   $('#modaltrigger').leanModal({ top: 110, overlay: 0.45 });

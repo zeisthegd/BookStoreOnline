@@ -14,7 +14,7 @@ $(function () {
       .done(function (data) {
         if (data == "success") {
           $("#loginMessage").html("<img src='../images/loginSuccess.gif' class='center'>");
-          window.setTimeout(function(){ window.location = "TrangChu.php" }, 1500);       
+          window.setTimeout(function(){ window.location = "TrangChu.php" }, 100);       
         } else {
           $("#loginMessage").text("Tên người dùng hoặc mật khẩu không tồn tại!");
           $("#btnLogin").show();
