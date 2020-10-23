@@ -1,8 +1,14 @@
 <?php
-if ( isset( $_POST[ 'search' ] ) ) {
+if ( isset( $_POST[ 'title' ] ) || isset( $_POST[ 'author' ] ) || isset( $_POST[ 'publisher' ] ) || isset( $_POST[ 'category' ] ) ) {
   include_once( "DataProvider.php" );
+  $title = $_POST[ 'title' ];
+  $author = $_POST[ 'author' ];
+  $publisher = $_POST[ 'publisher' ];
+  $category = $_POST[ 'category' ];
+
   $output = '';
-  $sql = "select * from book where BookTitle like '%" . $_POST[ "search" ] . "%'";
+  $sql = SetQuery( $title, $author, $publisher, $category );
+
   $result = DataProvider::ExecuteQuery( $sql );
   if ( mysqli_num_rows( $result ) > 0 ) {
     $output .= '<h4 align="center">Kết quả tìm kiếm</h4>';
@@ -40,4 +46,16 @@ if ( isset( $_POST[ 'search' ] ) ) {
   echo '';
 }
 
+function SetQuery( string $title, string $author, string $publisher, string $category ) {
+  $sql = "select * from book where BookTitle like '%" . $title . "%'";
+  if ( $title != "" )
+    return "select * from book where BookTitle like '%" . $title . "%'";
+  else if ( $author != "" )
+    return "select * from book where BookAuthor like '%" . $author . "%'";
+  else if ( $publisher != "" )
+    return "SELECT * FROM `book` INNER JOIN category on BookID = category.CategoryID WHERE category.CategoryName LIKE '%" . $publisher. "%'";
+  else if ( $category != "" )
+    return "SELECT * FROM `book` INNER JOIN category on BookID = category.CategoryID WHERE category.CategoryName LIKE '%" . $category. "%'";
+  return $sql;
+}
 ?>
