@@ -1,0 +1,17 @@
+{
+    "name": "BookStoreOnline",
+    "description": "Demo",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nhom 4",
+            "email": "phongntgamedev@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"vitalis\\HelloWorld\\": "src/"}
+    },
+    "require": {}
+}
